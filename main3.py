@@ -7,7 +7,7 @@ import torchcam
 import torch
 import torch.nn.functional as F
 import os
-
+from tqdm import tqdm
 
 def ScoreCAM_extracor(image, model, classidx=None):
     scam = torchcam.methods.ScoreCAM(model)
@@ -104,7 +104,7 @@ def main(opt):
     print("Image_dir:", img_dir)
     cnt = 0
     for label in labels:
-        for img in os.listdir(OSPATH.join(OSPATH.join(dir_path, label), img_dir)):
+        for img in tqdm(os.listdir(OSPATH.join(OSPATH.join(dir_path, label), img_dir))):
             img_path = OSPATH.join(
                 OSPATH.join(OSPATH.join(dir_path, label), img_dir), img
             )
@@ -117,7 +117,7 @@ def main(opt):
             coh_avg += coh
             com_avg += com
             cnt += 1
-            print(cnt)
+            # print(cnt)
 
     return adcc_avg / cnt, avgdrop_avg / cnt, coh_avg / cnt, com_avg / cnt
 
