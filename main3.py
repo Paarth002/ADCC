@@ -109,6 +109,8 @@ def main(opt):
                 OSPATH.join(OSPATH.join(dir_path, label), img_dir), img
             )
             opt.image = img_path
+            print(img_path)
+            print(solve(opt))
             adcc, avgdrop, coh, com = solve(opt)
             adcc_avg += adcc
             avgdrop_avg += avgdrop
